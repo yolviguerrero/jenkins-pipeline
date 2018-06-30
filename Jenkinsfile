@@ -1,31 +1,28 @@
 pipeline {
   agent any
   options {
-      ansiColor('xterm')
-      timestamps()
-      timeout(time: 1, unit: 'HOURS')
+    ansiColor('xterm')
+    timestamps()
+    timeout(time: 1, unit: 'HOURS')
   }
-
   environment {
     ARTIFACTOR = "${env.BUILD_NUMBER}.zip"
-    SLACK_MESSAGE = "Job '${env.JOB_NAME}' Build ${env.BUILD_NUMBER} URL ${env.BUILD_URL}"
+    SLACK_MESSAGE = "Job '${env.JOB_NAME}' Build ${env.BUILD_NUMBER}"
   }
 
   stages {
     stage("Repository") {
       steps {
-         // git url: "https://github.com/yolviguerrero/jenkins-pipeline.git"
-	 checkout scm
+          //git url: "https://github.com/mario21ic/jenkins-pipeline.git"
+          checkout scm
       }
     }
     stage("Build") {
       steps {
         echo "build"
-	sh "echo ${env.BUILD_NUMBER}"
-	sh "echo ${env.JOB_NAME}"
-	sh "echo ${env.WORKSPACE}"
-	sh "echo ${env.ARTIFACTOR}"  
-	sh "echo ${env.SLACK_MESSAGE}"
+        sh "echo ${env.BUILD_NUMBER}"
+        sh "echo ${env.ARTIFACTOR}"
+        sh "touch ${ARTIFACTOR}"
       }
     }
     stage("Test") {
@@ -36,6 +33,7 @@ pipeline {
     stage("Deploy") {
       steps {
         sh "echo deploy"
+        archiveArtifacts artifacts: "${ARTIFACTOR}", onlyIfSuccessful: true
       }
     }
   } 
