@@ -45,6 +45,24 @@ parameters {
         )
       }
     }
+
+  stage ('Apply') {
+      input {
+        message "Are you sure?"
+        ok "Yes"
+      }
+      steps {
+        sh "./ami_id.sh"
+      }
+    }
+
+
+
+
+
+
+
+
     stage("Deploy") {
       when {
         expression {
