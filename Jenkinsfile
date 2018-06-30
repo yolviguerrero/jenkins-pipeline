@@ -6,6 +6,11 @@ pipeline {
       timeout(time: 1, unit: 'HOURS')
   }
 
+  environment {
+    ARTIFACTOR = "${env.BUILD_NUMBER}.zip"
+    SLACK_MESSAGE = "Job '${env.JOB_NAME}' Build ${env.BUILD_NUMBER} URL ${env.BUILD_URL}"
+
+
   stages {
     stage("Repository") {
       steps {
@@ -18,8 +23,9 @@ pipeline {
         echo "build"
 	sh "echo ${env.BUILD_NUMBER}"
 	sh "echo ${env.JOB_NAME}"
-	sh "echo ${env.BUILD_URL}"
 	sh "echo ${env.WORKSPACE}"
+	sh "echo ${env.ARTIFACTOR}"  
+	sh "echo ${env.SLACK_MESSAGE}"
       }
     }
     stage("Test") {
