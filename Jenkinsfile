@@ -55,7 +55,7 @@ parameters {
           build job: "another_job", parameters: [
           [$class: 'StringParameterValue', name: 'SLACK_CHANNEL', value: "monitoring"],
           [$class: 'StringParameterValue', name: 'TYPE', value: 'cron']
-
+          ]
       }
     }
   } 
