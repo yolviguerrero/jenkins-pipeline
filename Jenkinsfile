@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage("Repository") {
       steps {
-          git url: "https://github.com/yolviguerrero/jenkins-pipeline.git"
+         // git url: "https://github.com/yolviguerrero/jenkins-pipeline.git"
+	 checkout scm
       }
     }
     stage("Build") {
