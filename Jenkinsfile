@@ -10,6 +10,7 @@ pipeline {
     stage("Build") {
       steps {
         echo "build"
+	sh "echo ${env.BUILD_NUMBER}
       }
     }
     stage("Test") {
