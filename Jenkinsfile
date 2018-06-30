@@ -11,9 +11,9 @@ pipeline {
       steps {
         echo "build"
 	sh "echo ${env.BUILD_NUMBER}"
-	sh "echo ${JOB_NAME}"
-	sh "echo ${BUILD_URL}"
-	sh "echo ${WORKSPACE}"
+	sh "echo ${env.JOB_NAME}"
+	sh "echo ${env.BUILD_URL}"
+	sh "echo ${env.WORKSPACE}"
       }
     }
     stage("Test") {
