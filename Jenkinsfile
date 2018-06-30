@@ -10,7 +10,10 @@ pipeline {
     stage("Build") {
       steps {
         echo "build"
-	sh "echo ${env.BUILD_NUMBER}
+	sh "echo ${env.BUILD_NUMBER}"
+	sh "echo ${JOB_NAME}"
+	sh "echo ${BUILD_URL}"
+	sh "echo ${WORKSPACE}"
       }
     }
     stage("Test") {
