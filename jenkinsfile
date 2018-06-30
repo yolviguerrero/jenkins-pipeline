@@ -1,19 +1,24 @@
 pipeline {
   agent any
   stages {
-  stage("Build") {
-    steps {
-      echo "build"
+    stage("Repository") {
+      steps {
+          git url: "https://github.com/yolviguerrero/jenkins-pipeline.git"
       }
     }
-  stage("Test") {
-    steps {
-      sh "echo tests"
+    stage("Build") {
+      steps {
+        echo "build"
+      }
+    }
+    stage("Test") {
+      steps {
+        sh "echo tests"
       }
     }
     stage("Deploy") {
-    steps {
-      sh "echo deploy"
+      steps {
+        sh "echo deploy"
       }
     }
   } 
