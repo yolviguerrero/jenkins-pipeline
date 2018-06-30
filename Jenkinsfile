@@ -10,6 +10,13 @@ pipeline {
     SLACK_MESSAGE = "Job '${env.JOB_NAME}' Build ${env.BUILD_NUMBER}"
   }
 
+parameters {
+    string(name: 'SLACK_CHANNEL', defaultValue: '#deploys', description: '')
+    choice(name: 'TYPE', choices: 'aut\ncron\ndata', description: 'Autoscaling, Cron or Data')
+    booleanParam(name: 'LAUNCH_CONFIGURATION', defaultValue: false, description: 'Update aws new ami')
+  }
+
+
   stages {
     stage("Repository") {
       steps {
