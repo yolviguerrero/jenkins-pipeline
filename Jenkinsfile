@@ -34,7 +34,10 @@ parameters {
     }
     stage("Test") {
       steps {
-        sh "echo tests"
+ parallel (
+          syntax: { sh "echo syntax" },
+          grep: { sh "echo 'grep'" }
+        )
       }
     }
     stage("Deploy") {
